@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import WeatherDisplay from "./components/WeatherDisplay";
+import WeatherStats from "./components/WeatherStats";
+import WeatherForecast from "./components/WeatherForecast";
 
 function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -19,19 +22,26 @@ function App() {
       if (geocodingData.results && geocodingData.results.length > 0) {
         const { latitude, longitude, name } = geocodingData.results[0];
 
-        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
         const weatherResponse = await fetch(weatherUrl);
         const weatherData = await weatherResponse.json();
 
-        if (weatherData && weatherData.current_weather) {
+        if (weatherData) {
           setWeatherData({
-            name: name,
+            name,
             temp: weatherData.current_weather.temperature,
             description: `Weather Code: ${weatherData.current_weather.weathercode}`,
             windSpeed: weatherData.current_weather.windspeed,
           });
+
+          const forecast = weatherData.daily.temperature_2m_max.map((maxTemp, index) => ({
+            date: weatherData.daily.time[index],
+            condition: "Sunny", // Placeholder, as Open-Meteo doesn't provide detailed conditions
+            temp: maxTemp,
+          }));
+          setForecastData(forecast);
         } else {
-          setError("Weather data not found for this location.");
+          setError("Weather data not found.");
         }
       } else {
         setError("City not found. Please check the spelling and try again.");
@@ -63,7 +73,7 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>Weather App</h1>
-        <p>Check the current weather conditions for your city!</p>
+        <p>Check current weather and a 3-day forecast for your city!</p>
       </header>
       <div className="card">
         <form onSubmit={handleSubmit}>
@@ -78,14 +88,11 @@ function App() {
         {loading && <p>Loading...</p>}
         {error && <p className="error">{error}</p>}
         {weatherData && <WeatherDisplay weatherData={weatherData} />}
+        {forecastData.length > 0 && <WeatherForecast forecast={forecastData} />}
       </div>
       <footer className="footer">
         Data provided by{" "}
-        <a
-          href="https://open-meteo.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">
           Open-Meteo API
         </a>
       </footer>
