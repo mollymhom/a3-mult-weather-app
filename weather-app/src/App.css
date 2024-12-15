@@ -15,7 +15,7 @@ body {
 }
 
 .header {
-  background-color: #007bff;
+  background-color: #0a2d42;
   color: white;
   padding: 20px;
   width: 100%;
@@ -57,7 +57,7 @@ input {
 }
 
 input:focus {
-  border-color: #007bff;
+  border-color: #0a2d42;
 }
 
 button {
@@ -65,18 +65,18 @@ button {
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #0a2d42;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #2d3f73;
 }
 
 .error {
-  color: red;
+  color: rgb(116, 10, 10);
   font-size: 1rem;
 }
 
@@ -87,7 +87,7 @@ button:hover {
 }
 
 .footer a {
-  color: #007bff;
+  color: #0a2d42;
   text-decoration: none;
 }
 

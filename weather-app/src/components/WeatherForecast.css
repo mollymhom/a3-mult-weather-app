@@ -1,10 +1,10 @@
 .weather-forecast {
-    background: #a29bfe;
+    background: #e3f2fd;
     padding: 15px;
     border-radius: 8px;
     text-align: center;
     margin: 10px 0;
-    color: #fff;
+    color: #1d1d1d;
   }
   
   .weather-forecast ul {
