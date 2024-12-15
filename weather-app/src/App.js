@@ -73,7 +73,7 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>Weather App</h1>
-        <p>Check current weather and a 3-day forecast for your city!</p>
+        <p>Check current weather and a 7-day forecast for your city!</p>
       </header>
       <div className="card">
         <form onSubmit={handleSubmit}>

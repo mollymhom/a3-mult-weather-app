@@ -4,7 +4,7 @@ import './WeatherForecast.css';
 function WeatherForecast({ forecast }) {
   return (
     <div className="weather-forecast">
-      <h3>3-Day Forecast</h3>
+      <h3>7-Day Forecast</h3>
       <ul>
         {forecast.map((day, index) => (
           <li key={index}>
