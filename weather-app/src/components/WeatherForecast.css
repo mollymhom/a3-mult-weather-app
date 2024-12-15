@@ -1,0 +1,18 @@
+.weather-forecast {
+    background: #a29bfe;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+    color: #fff;
+  }
+  
+  .weather-forecast ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .weather-forecast li {
+    margin: 5px 0;
+  }
+  
